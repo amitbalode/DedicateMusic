@@ -26,32 +26,31 @@ DM.App.search.searchButton = "searchbox";
 
 <?php //Function called when user click on Search button/ or type in search button ?>
 DM.App.search.searchButtonClicked = function(){
-	var query = $("#"+DM.App.search.searchButton).val();
-	DM.App.search.ytFetchSongs(query);
+  var query = $("#"+DM.App.search.searchButton).val();
+  DM.App.search.ytFetchSongs(query);
 };
 
 
 <?php //Function called to fetch songs from youtube ?>
 DM.App.search.ytFetchSongs = function(query){
-	var media = DM.App.mediaSource['yt'];
-	var songs = [];
-	$.getJSON(media.fetchUrl+query+'&alt=json-in-script&callback=?&max-results=12&start-index=1',
-		function(data){
-    		$.each(data.feed.entry, function(i, item) {
+  var media = DM.App.mediaSource['yt'];
+  var songs = [];
+  $.getJSON(media.fetchUrl+query+'&alt=json-in-script&callback=?&max-results=12&start-index=1',
+    function(data){
+      $.each(data.feed.entry, function(i, item) {
+        var video = item['id']['$t'];
+        video = video.replace('http://gdata.youtube.com/feeds/api/videos/','http://www.youtube.com/watch?v=');  //replacement of link
+        var videoID = video.replace('http://www.youtube.com/watch?v=',''); // removing link and getting the video ID
 
-    			var video = item['id']['$t'];
-			  video = video.replace('http://gdata.youtube.com/feeds/api/videos/','http://www.youtube.com/watch?v=');  //replacement of link
-			  videoID = video.replace('http://www.youtube.com/watch?v=',''); // removing link and getting the video ID
-
-			  song = new DM.App.struct.song();
-			  song.songId = videoID;
-			  song.songTitle = item['title']['$t'];
-			  song.songUrl = video;
-			  song.songMedia = media.id;
-    			songs.push(song);	
-    		});
-    		DM.App.homeTab.populate(songs);
-		});
+        var song = new DM.App.struct.song();
+        song.songId = videoID;
+        song.songTitle = item['title']['$t'];
+        song.songUrl = video;
+        song.songMedia = media.id;
+        songs.push(song);	
+      });
+      DM.App.homeTab.populate(songs);
+  });
 };
 <?php // ------------------------------------------------ ?>
 
