@@ -78,5 +78,30 @@ DM.App.homeTab.populate = function(data){
 };
 <?php // ------------------------------------------------ ?>
 
-DM.App.search.searchButtonClicked();
+<?php // ------- Defining Listener Framework --------------- ?>
+DM.App.Events = {};
+DM.App.Events.eventListeners = [];
+DM.App.Events.addEventListener = function(_msg, _callback) { 
+  if (DM.App.Events.eventListeners[_msg] == null) DM.App.Events.eventListeners[_msg] = [];
+  DM.App.Events.eventListeners[_msg].push(_callback);
+}
+
+DM.App.Events.triggerEvent = function(_msg, _params) {
+  if (_msg == null || _msg == "") return;
+  <?php // see if a listener has been set on this message?>
+  if (DM.App.Events.eventListeners[_msg] != null) {
+    <?php // support for multiple callbacks per event so loop through ?>
+    for (var i = 0; i < DM.App.Events.eventListeners[_msg].length; i++) {
+      if (typeof DM.App.Events.eventListeners[_msg][i] == "function") {
+        DM.App.Events.eventListeners[_msg][i].call(this, _params);
+      }
+    }
+  }
+}
+<?php // ------------------------------------------------ ?>
+
+$(document).ready(function() {
+	DM.App.Events.addEventListener('complete',DM.App.search.searchButtonClicked);
+	DM.App.Events.triggerEvent('complete');
+});
 </script>
