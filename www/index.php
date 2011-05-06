@@ -1,8 +1,12 @@
 <?php 
-  /**
-   * Authors: Amit Balode, Abhishek Sinhal & Rohani Raina.
-   */
+/**
+ * Authors: Amit Balode, Abhishek Sinhal & Rohani Raina.
+ */
+  require_once dirname(dirname(__FILE__))."/www/inc/path.php";
+  require_once DEDICATE_MUSIC_PATH."/www/header.php";
+
 ?>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <input type="text" value="lata" id="searchbox" name="searchbox"/>
 <script type="text/javascript">
@@ -105,3 +109,4 @@ $(document).ready(function() {
   DM.App.Events.triggerEvent('complete');
 });
 </script>
+<?php ?>
