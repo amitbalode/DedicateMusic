@@ -51,8 +51,8 @@ DM.App.search.ytFetchSongs = function(query){
       $.each(data.feed.entry, function(i, item) {
         console.log(item);
         var video = item['id']['$t'];
-        video = video.replace('http://gdata.youtube.com/feeds/api/videos/','http://www.youtube.com/watch?v=');  //replacement of link
-        var videoID = video.replace('http://www.youtube.com/watch?v=',''); // removing link and getting the video ID
+        video = video.replace('http://gdata.youtube.com/feeds/api/videos/','http://www.youtube.com/watch?v=');
+        var videoID = video.replace('http://www.youtube.com/watch?v=','');
 
         var song = new DM.App.struct.song();
         song.songId = videoID;
@@ -101,7 +101,7 @@ DM.App.Events.triggerEvent = function(_msg, _params) {
 <?php // ------------------------------------------------ ?>
 
 $(document).ready(function() {
-	DM.App.Events.addEventListener('complete',DM.App.search.searchButtonClicked);
-	DM.App.Events.triggerEvent('complete');
+  DM.App.Events.addEventListener('complete',DM.App.search.searchButtonClicked);
+  DM.App.Events.triggerEvent('complete');
 });
 </script>
