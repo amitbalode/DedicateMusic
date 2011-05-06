@@ -5,17 +5,17 @@ DM = {};
 DM.App = {};
 DM.App.mediaSource = [];
 DM.App.mediaSource['yt'] = {
-	'id': 'youtube', 
-	'fetchUrl': 'http://gdata.youtube.com/feeds/api/videos?q='
+  'id': 'youtube', 
+  'fetchUrl': 'http://gdata.youtube.com/feeds/api/videos?q='
 };
 
 <?php // ------- Defining Data Structures --------------- ?>
 DM.App.struct = {};
 DM.App.struct.song = function(){
-	this.songId = '';
-	this.songTitle = '';
-	this.songUrl = '';
-	this.songMedia = '';
+  this.songId = '';
+  this.songTitle = '';
+  this.songUrl = '';
+  this.songMedia = '';
 };
 <?php // ------------------------------------------------ ?>
 
