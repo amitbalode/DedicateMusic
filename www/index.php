@@ -8,105 +8,39 @@
 ?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<input type="text" value="lata" id="searchbox" name="searchbox"/>
+<script src="<?php echo DM_BASE_URL ?>www/js/youtube.js?3" type="text/javascript"></script>
+<script src="<?php echo DM_BASE_URL ?>www/js/static.js" type="text/javascript"></script>
+<script src="<?php echo DM_BASE_URL ?>www/js/lib.js" type="text/javascript"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> google.load("swfobject", "2.1"); </script>
+<link type="text/css" href="<?php echo DM_BASE_URL ?>www/css/youtube.css" rel="stylesheet" />
+<input type="text" style="display:none" value="lata" id="searchbox" name="searchbox"/>
+<a onclick="DM.App.search.searchButtonClicked();"><img src="http://www.topnews.in/files/Lata%20mangeshkar1.jpg" width="100" height="100" /></a>
+<?php require_once DEDICATE_MUSIC_PATH."/www/js/main.js.php";  ?>
 <script type="text/javascript">
-<?php // ------- Defining Data Structures --------------- ?>
-DM = {};
-DM.App = {};
-DM.App.struct = {};
-DM.App.struct.song = function(){
-  this.songId = '';
-  this.songTitle = '';
-  this.songUrl = '';
-  this.songSmallPic = '';
-  this.songBigPic = '';
-  this.songMedia = '';
-};
-<?php // ------------------------------------------------ ?>
-
-<?php // ------- Defining Data Constants --------------- ?>
-DM.App.mediaSource = [];
-DM.App.mediaSource['yt'] = {
-  'id': 'youtube', 
-  'fetchUrl': 'http://gdata.youtube.com/feeds/api/videos?q=',
-  'pic_small': 'http://img.youtube.com/vi/{videoId}/2.jpg',
-  'pic_big': 'http://img.youtube.com/vi/{videoId}/0.jpg'
-};
-<?php // ------------------------------------------------ ?>
-
-<?php // ------- Defining Search Configuration HTML ids and functions --------------- ?>
-DM.App.search = {};
-<?php //Configuration ?>
-DM.App.search.searchButton = "searchbox";
-
-<?php //Function called when user click on Search button/ or type in search button ?>
-DM.App.search.searchButtonClicked = function(){
-  var query = $("#"+DM.App.search.searchButton).val();
-  DM.App.search.ytFetchSongs(query);
-};
 
 
-<?php //Function called to fetch songs from youtube ?>
-DM.App.search.ytFetchSongs = function(query){
-  var media = DM.App.mediaSource['yt'];
-  var songs = [];
-  $.getJSON(media.fetchUrl+query+'&alt=json-in-script&callback=?&max-results=12&start-index=1',
-    function(data){
-      $.each(data.feed.entry, function(i, item) {
-        console.log(item);
-        var video = item['id']['$t'];
-        video = video.replace('http://gdata.youtube.com/feeds/api/videos/','http://www.youtube.com/watch?v=');
-        var videoID = video.replace('http://www.youtube.com/watch?v=','');
-
-        var song = new DM.App.struct.song();
-        song.songId = videoID;
-        song.songTitle = item['title']['$t'];
-        song.songUrl = video;
-        song.songSmallPic = media.pic_small.replace('{videoId}',videoID);
-        song.songBigPic = media.pic_big.replace('{videoId}',videoID);
-        song.songMedia = media.id;
-        songs.push(song);	
-      });
-      DM.App.homeTab.populate(songs);
-  });
-};
-<?php // ------------------------------------------------ ?>
-
-
-<?php // ------- Defining Home Tab functionality --------------- ?>
-DM.App.homeTab = {};
-DM.App.homeTab.populate = function(data){
-  for(var i = 0; i < data.length; i++) {
-	  console.log(data[i]);
-  }	
-};
-<?php // ------------------------------------------------ ?>
-
-<?php // ------- Defining Listener Framework --------------- ?>
-DM.App.Events = {};
-DM.App.Events.eventListeners = [];
-DM.App.Events.addEventListener = function(_msg, _callback) { 
-  if (DM.App.Events.eventListeners[_msg] == null) DM.App.Events.eventListeners[_msg] = [];
-  DM.App.Events.eventListeners[_msg].push(_callback);
-}
-
-DM.App.Events.triggerEvent = function(_msg, _params) {
-  if (_msg == null || _msg == "") return;
-  <?php // see if a listener has been set on this message?>
-  if (DM.App.Events.eventListeners[_msg] != null) {
-    <?php // support for multiple callbacks per event so loop through ?>
-    for (var i = 0; i < DM.App.Events.eventListeners[_msg].length; i++) {
-      if (typeof DM.App.Events.eventListeners[_msg][i] == "function") {
-        DM.App.Events.eventListeners[_msg][i].call(this, _params);
-      }
-    }
-  }
-}
-<?php // ------------------------------------------------ ?>
-
+var mainPlayer = null;
 $(document).ready(function() {
-  DM.App.Events.addEventListener('complete',DM.App.search.searchButtonClicked);
-  DM.App.Events.triggerEvent('complete');
+  //DM.App.Events.addEventListener('complete',DM.App.search.searchButtonClicked);
+  //DM.App.Events.triggerEvent('complete');
+	<?php //Instantiate our player ?>
+	mainPlayer = new DM.App.player('yt');
+	loadPlayer(480,320);
 });
 </script>
 <?php ?>
+<div id="youtube_js">
+    <div id="youtube_js_player">
+        <div id="youtube_replaceme" style="width: '+viewportwidth+'px; height: '+viewportheight+'px;"></div>
+        <div class="youtube_controls">
+            <a href="#" id="yt_play_video" onclick="mainPlayer.play(); return false;">Play</a>
+            <a href="#" id="yt_pause_video" onclick="mainPlayer.pause(); return false;">Pause</a>
+            <a href="#" id="yt_next_video" onclick="mainPlayer.playNext(); return false;">Next</a>
+            <span id="yt_time">00:00/00:00</span>
+            <input type="hidden" id="videoid" value="d_2lnr5bOSI" />
+            <div id="yt_volume"><div style="position: absolute" id="yt_slider"></div></span>
+            </div>
+        </div>
+    </div>
+</div>
