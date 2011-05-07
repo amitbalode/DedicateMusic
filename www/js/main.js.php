@@ -38,9 +38,13 @@ DM.App.constant.get = function(id){
 	return DM.App.mediaSource[DM.App.mediaSource.active][id];
 };
 
-console.log(DM.App.constant.get('playerId'));
-
 <?php // ------------------------------------------------ ?>
+
+createDMPlayer = function(){
+	<?php //Instantiate our player ?>
+	mainPlayer = new DM.App.player(DM.App.mediaSource.active);
+	mainPlayer.load();
+};
 
 letsPlaySomeMusic = function(object){
 	var playlist = null;
@@ -59,7 +63,7 @@ letsPlaySomeMusic = function(object){
 };
 
 
-
+<?php //This is our main player class ?>
 DM.App.player = function(playerType){
   this.currentSong = '';
   this.playerType = playerType;
@@ -68,6 +72,10 @@ DM.App.player = function(playerType){
   this.initialize = function(videos){
     this.videos = videos;
   };
+
+  this.load = function(){
+	  loadPlayer(480,320);
+	};
 
   
   this.playNext = function(){
@@ -88,9 +96,17 @@ DM.App.player = function(playerType){
 
 };
 
+<?php 
+  //This is our main player videos to be played.
+  //It contains an array of playlist.
+  //For single video, to be played, it will contain just 1 playlist with 1 song.
+  //fetchOnEmpty paramter should be used, to fetch more songs from youtube when
+  //songs are about to end....
+?>
 DM.App.player.videos = function(){
   this.playlists = [];
   this.fetchOnEmpty = 'N';
+  this.randomize = 'Y';
   this.add = function(playlist){
     this.playlists.push(playlist);
   };
@@ -101,10 +117,18 @@ DM.App.player.videos = function(){
 
   this.getNextVideo = function(){
 	  var song = null;
-	  for(var i = 0; i < this.playlists.length; i++) {
+	  var i = 0;
+	  if(this.randomize == 'Y' && this.playlists.length > 0){
+		  i = Math.floor(Math.random()*this.playlists.length);
+		}
+	  for(; i < this.playlists.length; i++) {
 		  //console.log(this.playlists[i]);
 			if(this.playlists[i].songs.length > 0){
-			  song = this.playlists[i].songs.splice(0,1);
+				var j = 0;
+				if(this.randomize == 'Y'){
+					j = Math.floor(Math.random()*this.playlists[i].songs.length);
+				}
+			  song = this.playlists[i].songs.splice(j,1);
 			  return song[0].songId;
 		  }
 	  }
@@ -115,7 +139,14 @@ DM.App.player.videos = function(){
 <?php // ------- Defining Listener Framework --------------- ?>
 DM.App.Events = {};
 DM.App.Events.eventListeners = [];
+DM.App.Events.storedEvents = [];
 DM.App.Events.addEventListener = function(_msg, _callback) { 
+	if (DM.App.Events.storedEvents[_msg] != null) {
+		if (typeof _callback == "function") {
+	    _callback.call(this, DM.App.Events.storedEvents[_msg].params);
+	    return;
+	  }
+	}
   if (DM.App.Events.eventListeners[_msg] == null) DM.App.Events.eventListeners[_msg] = [];
   DM.App.Events.eventListeners[_msg].push(_callback);
 }
@@ -131,6 +162,7 @@ DM.App.Events.triggerEvent = function(_msg, _params) {
       }
     }
   }
+  DM.App.Events.storedEvents[_msg] = {params: _params};
 }
 <?php // ------------------------------------------------ ?>
 
