@@ -86,8 +86,6 @@ DM.App.player = function(playerType){
   this.mute = function(){};
   this.unmute = function(){};
 
-  
-
 };
 
 DM.App.player.videos = function(){
