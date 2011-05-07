@@ -8,6 +8,7 @@
 ?>
 
 <link type="text/css" href="<?php echo DM_BASE_URL ?>www/css/youtube.css" rel="stylesheet" />
+<link type="text/css" href="<?php echo DM_BASE_URL ?>www/css/main.css?1" rel="stylesheet" />
 
 <?php //Common JS library for Dedicate Music ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -22,31 +23,50 @@
 <?php //JS library for Dedicate Music ?>
 <?php require_once DEDICATE_MUSIC_PATH."/www/js/main.js.php";  ?>
 
-
-<input type="text" style="display:none" value="lata" id="searchbox" name="searchbox"/>
-<a onclick="DM.App.search.searchButtonClicked();"><img src="http://www.topnews.in/files/Lata%20mangeshkar1.jpg" width="100" height="100" /></a>
-
+<?php require_once DEDICATE_MUSIC_PATH."/www/inc/data.php";  ?>
 
 <script type="text/javascript">
 var mainPlayer = null;
 DM.App.Events.addEventListener('complete',createDMPlayer);
+DM.App.Events.addEventListener('complete',imageHover);
 
 $(document).ready(function() {
   DM.App.Events.triggerEvent('complete');
 });
 </script>
 
-<div id="youtube_js">
-    <div id="youtube_js_player">
-        <div id="youtube_replaceme" style="width: '+viewportwidth+'px; height: '+viewportheight+'px;"></div>
-        <div class="youtube_controls">
-            <a href="#" id="yt_play_video" onclick="mainPlayer.play(); return false;">Play</a>
-            <a href="#" id="yt_pause_video" onclick="mainPlayer.pause(); return false;">Pause</a>
-            <a href="#" id="yt_next_video" onclick="mainPlayer.playNext(); return false;">Next</a>
-            <span id="yt_time">00:00/00:00</span>
-            <input type="hidden" id="videoid" value="d_2lnr5bOSI" />
-            <div id="yt_volume"><div style="position: absolute" id="yt_slider"></div></span>
-            </div>
-        </div>
-    </div>
+<body>
+<div id="wrapper">
+<div id="main">
+  <div class="pghead h150"></div>
+  <div class="content3" style="margin-top:50px;">
+  <?php /*
+      <img width="100%" height="120" alt="" src="http://ytplayer.com/home/wp-content/uploads/2010/09/cropped-concert-bw.jpg">
+  		  <div style="background:none repeat scroll 0 0 #000000;height:2px;"></div> */ ?>
+  		  <div>
+  		    <input type="text" style="display:none" value="lata" id="searchbox" name="searchbox"/>
+        <ul class="thumb">
+          	<li><a onclick="DM.App.search.searchButtonClicked();"><img src="http://www.topnews.in/files/Lata%20mangeshkar1.jpg" alt="" /></a></li>
+          	<li><a onclick="DM.App.search.searchButtonClicked();"><img src="http://www.topnews.in/files/Lata%20mangeshkar1.jpg" alt="" /></a></li>
+        </ul>
+      </div>
+      <div id="youtube_js" style="float:right;margin-right:50px;margin-top:50px;">
+          <div id="youtube_js_player">
+              <div id="youtube_replaceme" style="width: '+viewportwidth+'px; height: '+viewportheight+'px;"></div>
+              <div class="youtube_controls">
+                  <a href="#" id="yt_play_video" onclick="mainPlayer.play(); return false;">Play</a>
+                  <a href="#" id="yt_pause_video" onclick="mainPlayer.pause(); return false;">Pause</a>
+                  <a href="#" id="yt_next_video" onclick="mainPlayer.playNext(); return false;">Next</a>
+                  <span id="yt_time">00:00/00:00</span>
+                  <input type="hidden" id="videoid" value="d_2lnr5bOSI" />
+                  <div id="yt_volume"><div style="position: absolute" id="yt_slider"></div></span>
+                  </div>
+              </div>
+          </div>
+      </div> 
+    <div class="clearer"></div>
+  </div>
 </div>
+</div>
+
+</body>

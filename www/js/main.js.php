@@ -74,7 +74,7 @@ DM.App.player = function(playerType){
   };
 
   this.load = function(){
-	  loadPlayer(480,320);
+	  loadPlayer(400,270);
 	};
 
   

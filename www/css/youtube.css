@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
 #youtube_js {
     margin: 0 auto;
-    width: 480px;
-    height: 350px;
+    width: 400px;
+    height: 300px;
     background: #000;
     font-family: 'Myriad Pro', 'Trebuchet MS', Verdana, Tahoma;
     font-size: 10px;
@@ -47,7 +47,7 @@
     height:20px;
     position:absolute;
     right:30px;
-    width:200px;
+    width:150px;
 }
  
 #yt_volume.div {
