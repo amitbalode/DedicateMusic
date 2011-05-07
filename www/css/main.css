@@ -1,0 +1,65 @@
+@CHARSET "UTF-8";
+
+body, div, ul, ol, ul li, ol li, table, form, dl, dl, dt, dd {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #E3F7C0;
+    background-image: url("http://c4.jalbum.net/themes/default/bg.jpg?ver=2");
+    background-position: center top;
+    background-repeat: repeat-x;
+}
+body, textarea, input {
+    color: #444444;
+    font-family: Arial,Helvetica,Tahoma,sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+}
+.content3 {
+    background-color: #FFFFFF;
+    border-radius: 10px 10px 10px 10px;
+    padding: 0 0 20px;
+}
+#main {
+    border-radius: 10px 10px 10px 10px;
+    width: 100%;
+}
+.clearer {
+    clear: both;
+}
+#wrapper {
+    margin: 15px auto 0;
+    position: relative;
+    width: 980px;
+}
+
+ul.thumb {
+	float: left;
+	list-style: none;
+	margin: 0; padding: 10px;
+	width: 50%;
+}
+ul.thumb li {
+	margin: 0; padding: 5px;
+	float: left;
+	padding: 15px;
+	position: relative;  /* Set the absolute positioning base coordinate */
+	width: 110px;
+	height: 110px;
+}
+ul.thumb li img {
+	width: 100px; height: 100px; /* Set the small thumbnail size */
+	-ms-interpolation-mode: bicubic; /* IE Fix for Bicubic Scaling */
+	border: 1px solid #ddd;
+	padding: 5px;
+	background: #f0f0f0;
+	position: absolute;
+	left: 0; top: 0;
+}
+ul.thumb li img.hover {
+	background:url(http://www.sohtanaka.com/web-design/examples/image-zoom/thumb_bg.png) no-repeat center center;  /* Image used as background on hover effect
+	border: none; /* Get rid of border on hover */
+}
+		
+	
