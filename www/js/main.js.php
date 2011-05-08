@@ -1,4 +1,7 @@
 <script>
+var dm_category = <?php echo json_encode($dm_category);?>;
+var dm_albums = <?php echo json_encode($dm_albums);?>;
+
 <?php // ------- Defining Data Structures --------------- ?>
 DM = {};
 DM.App = {};
@@ -55,7 +58,7 @@ letsPlaySomeMusic = function(object){
   }else{
 	  alert("You suck Balode. Not a valid type object to play");
 	  return;
-	}	  
+	}
   var playerVideos = new DM.App.player.videos();
   playerVideos.add(playlist);
   mainPlayer.initialize(playerVideos);
@@ -80,6 +83,7 @@ DM.App.player = function(playerType){
   
   this.playNext = function(){
     var nextVideo = this.videos.getNextVideo();
+	  console.log(nextVideo);	  
     document.getElementById(DM.App.constant.get('playerId')).loadVideoById(nextVideo);
   };
 
@@ -171,11 +175,22 @@ DM.App.search = {};
 DM.App.search.searchButton = "searchbox";
 
 <?php //Function called when user click on Search button/ or type in search button ?>
-DM.App.search.searchButtonClicked = function(){
-  var query = $("#"+DM.App.search.searchButton).val();
+DM.App.search.searchButtonClicked = function(val){
+	var query = val;
+	if(query == null) query = $("#"+DM.App.search.searchButton).val();
   DM.App.search.ytFetchSongs(query);
 };
 
+<?php //Function called when user click on Search button/ or type in search button ?>
+DM.App.search.albumClicked = function(val){
+	var playList = new DM.App.struct.playList();
+	for(var i = 0; i < dm_albums[val]['song_ids'].length; i++) {
+    var song = new DM.App.struct.song();
+    song.songId = dm_albums[val]['song_ids'][i];
+    playList.addSong(song);
+	}
+	DM.App.homeTab.populate(playList);
+};
 
 <?php //Function called to fetch songs from youtube ?>
 DM.App.search.ytFetchSongs = function(query){
@@ -195,7 +210,8 @@ DM.App.search.ytFetchSongs = function(query){
         song.songSmallPic = media.pic_small.replace('{videoId}',videoID);
         song.songBigPic = media.pic_big.replace('{videoId}',videoID);
         song.songMedia = media.id;
-        playList.addSong(song);	
+        playList.addSong(song);
+  	      console.log(song);	  
       });
       DM.App.homeTab.populate(playList);
   });

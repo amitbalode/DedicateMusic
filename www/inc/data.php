@@ -1,14 +1,11 @@
 <?php
 
   $dm_category = array();
-  $dm_category['bollywood'] = array('name' => 'Bollywood','album_ids' => array('lataji'));
+  $dm_category['bollywood'] = array('name' => 'Bollywood','album_ids' => array('lataji','amitji','kishoreda','love'));
   $dm_category['hollywood'] = array('name' => 'Hollywood','album_ids' => array());
   
-  $dm_albums = array(
-    array('id' => 'lataji','name' => 'Lata Mangeskar', 'playlist_ids' => array('lataji1')),
-    array('id' => 'hollywood','name' => 'Hollywood', 'playlist_ids' => array()),
-  );
+  $dm_albums['lataji'] = array('name' => 'Lata Mangeskar', 'playlist_id' => 'E608B2C85A7F2777', 'album_cover'=>"http://www.topnews.in/files/Lata%20mangeshkar1.jpg",'song_ids' => array('_Z60n1j9_AQ','quf66SYblck','KPZe1L0lIZM','yPhBr3U-7Qk','DChnkm5tOl4','zTUjZ7d0mf0','aSqwfhYAoxs','GIMP-dCir4Q','wsIdZFab3-o','ExtmbhA5DSI','1SkqbQ2T_T4','o6W711lzvGg','S6HgqaaYM8g','V8NVyVny1_4','Pqx2RGbynDI','4SbGTmmPlUg','XdJVp5ANBK0','oGKDBhdxn6c','3huEF2y4TNE','8yfzxD3MUh0','z060am6V9vA','cvIarQ9Qkiw','7aPtjImR5RA','Isz8ic5npjA','Jp5LtQhslwQ','zRqzqsphmRY','FZCdSmTxXRo','WAy4Z3iG1iQ','deiG3GMhP0Q','ulG1g4FbrsE','9Mu-DpRNnKU','h0ZI824Tlnk','WDa7YmjaKP0','yhcA9tmTqaw','iKmHaAAr1Ho'));
+  $dm_albums['amitji'] = array('name' => 'Amitab Bachan Old songs', 'playlist_id' => '37C0F6EC6AF3D0CE',  'album_cover'=> "http://t0.gstatic.com/images?q=tbn:ANd9GcRVdArDgeaOUPrrDko2djUmED0_Rii1hTE8AiEgJvv7g3C7N28o",'song_ids' => array('nNfJVvPG5FM','KntavOjm00I','JrcI1IDYKps','7mboQLuW9no','Ie5YvDd4NFw','Z5-eJPTimXE','w4oXJJ5OpSw','8nvfiEPAk00','rF4M8NPXXJk','l_Te-0jfLG8','rm17BPGvZSc','O1FJhQinzAg','PcIcUCP7cWo','BtvgoqPy0qw','jpf5MoxWuxQ','VooHala_fAw','7owr7GLHpjU','GsdHz6c6bFQ','XKDtA23Xq7I','XEYihg5ohqI','3MrVTdxKnIs','RuQMjuvMugk','ihw1tr2lVHo','vB_uWXO2YYc','JUo_YBfiDc8','KpsviqQAI54','rlZVvZl1BQs','NoAZKdp1CiU','su5gAnqC7sg','GJaXi5qW4F4','1OY_tyWS3qY','6zQzcwVz6wM','_RZGK7Qv0lk','2yPBXnPNKCc','ofkL9rbUMEk','m6jwTl2-ML0'));
+  $dm_albums['kishoreda'] = array('name' => 'Kishore Kumar Old songs', 'playlist_id' => '59F884314209483B',  'album_cover'=> "http://t3.gstatic.com/images?q=tbn:ANd9GcSitGSC3okSR0nNdSyXBGhCgmxUNbnPs3_nR130zqq6JlgUfvKk",'song_ids' => array('WNpEzxfDubs','0PvsjXfSmHU','c-saNxa7SV0','ZKQXEnl3zEM','FRBSSwVF9NQ','U3TI-VXKRl8','2j5XaFEviFc','FNCCc1ncw0Q','Pc36I8DHrQg','hRr4DkJ6Qtk','OvKvPBX--wI','M_MDTYG7I48','7sjrKgZTFCc','PQ2pvJPc1Y8','rC2hNKPDKKs','mcK9il887zs','Z997bfLIn1M','R7k4TqCA4vQ','MAvVDCOdC_k','pQKAc3jzAL4','E_WV6HRq3SM','tvv5g4YOt-k','5VzUxxa0c2I','AFIEFUFmXhc','kH_Duecleds','lslZptXok8o','_sZg4EUB3IM','Zr_enRRcyuw','xqYGYV3X3xU','rdkOoKzg9T4','ApOIJZrFenU','DAb-ru6rjXs','LKGKas022hc','beqTRIpoos8','VWt9njK6u-o','szFxM9KBNMA','IkZXmr7IQng','2tbkSuytggA','D1ubahl6AOA'));
+  $dm_albums['love'] = array('name' => 'Love songs', 'playlist_id' => '4928362A6D63B93E',  'album_cover'=> "http://t1.gstatic.com/images?q=tbn:ANd9GcTIjOQMUvKr-VShU_2Dgx8MFxUhO2PPXsv2sbE-vQ5rtyQbvU6--Q",'song_ids' => array('iV1o8_Ot90E','ycd-Zv78AXw','5gHOmI-Y-SQ','PchcttAMnL0','1h3euKj21b4','gOWu35hDi9Y','S1Z5Wte61DY','1zNcN0Kwh9o','EKMPf737pp0','1J1BO6lGug4','Sous-GWD1t8','-XY6PQFir10','9syNf7CKlOk','z0l1lEN8nII','3unptPIAdMk','QLprWQbivAk','VJL3U4EnbIE','JenRznZ2no4','6F3_NrSCxyo','LUXuNmwaXtY','V2b81VeRV-I','nmDveowKq8U','sQtpHWy2TO8','OwfyMHj7H8A','8XaM-mseKa0','Vu59jFQEr4A','j0jgKr-GeGI','hbcifJuoDYs','S20bUhU79Wg','jDI57LcIGBE','_utrcUZHxpg','lIuAexCdM9s','su9mBRu8wtw','izLYftMWbvY','oGKDBhdxn6c','c9_mV-aJ1SA','JiIYXv-nZmY','tRmLnYUpOaE','1bZeW3NMM_c','KqpIIaCJggY'));
   
-  $dm_playlists = array(
-    array('id' => 'lataji1','name' => 'Lata Mangeskar1', 'song_ids' => array('7aPtjImR5RA','TFr6G5zveS8')),
-  );    

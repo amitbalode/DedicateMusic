@@ -23,7 +23,6 @@
 <?php //JS library for Dedicate Music ?>
 <?php require_once DEDICATE_MUSIC_PATH."/www/js/main.js.php";  ?>
 
-<?php require_once DEDICATE_MUSIC_PATH."/www/inc/data.php";  ?>
 
 <script type="text/javascript">
 var mainPlayer = null;
@@ -36,6 +35,10 @@ $(document).ready(function() {
 </script>
 
 <body>
+<?php 
+  $current_albums = $dm_category[$default_category]['album_ids'];
+  error_log(json_encode($current_albums));
+?>
 <div id="wrapper">
 <div id="main">
   <div class="pghead h150"></div>
@@ -46,8 +49,9 @@ $(document).ready(function() {
   		  <div>
   		    <input type="text" style="display:none" value="lata" id="searchbox" name="searchbox"/>
         <ul class="thumb">
-          	<li><a onclick="DM.App.search.searchButtonClicked();"><img src="http://www.topnews.in/files/Lata%20mangeshkar1.jpg" alt="" /></a></li>
-          	<li><a onclick="DM.App.search.searchButtonClicked();"><img src="http://www.topnews.in/files/Lata%20mangeshkar1.jpg" alt="" /></a></li>
+          <?php foreach($current_albums as $album){ ?>
+          		<li><a onclick='DM.App.search.albumClicked("<?php echo $album; ?>");'><img src="<?php echo $dm_albums[$album]['album_cover']?>" alt="" /></a></li>
+          	<?php } ?>
         </ul>
       </div>
       <div id="youtube_js" style="float:right;margin-right:50px;margin-top:50px;">
